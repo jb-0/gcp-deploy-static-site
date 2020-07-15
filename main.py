@@ -1,29 +1,27 @@
 from google.cloud import storage
-from config import bucketName, localFolder, bucketFolder, credentials
-from os import listdir, path
+from config import bucket_name, credentials, project
+import os
 import git
 import shutil
 import tempfile
 
-storage_client = storage.Client(credentials=credentials, project="personal-site-283305")
-bucket = storage_client.bucket(bucketName)
+storage_client = storage.Client(credentials=credentials, project=project)
+bucket = storage_client.bucket(bucket_name)
 
+temp_dir = tempfile.mkdtemp()
+git.Repo.clone_from('https://github.com/jb-0/site.git', temp_dir, branch='master', depth=1)
 
-def get_repo():
-    temp_dir = tempfile.mkdtemp()
-    git.Repo.clone_from('https://github.com/jb-0/site.git', temp_dir, branch='master', depth=1)
-    #shutil.move(path.join(t, 'setup.py'), '.')
-    shutil.rmtree(temp_dir)
+exclude_subdirs = set(['.git'])
+exclude_files = set(['README.md', 'LICENSE', '.gitignore'])
 
+for path, subdirs, files in os.walk(temp_dir):
+    subdirs[:] = [sd for sd in subdirs if sd not in exclude_subdirs]
+    files[:] = [f for f in files if f not in exclude_files]
+    for name in files:
+        local_path = os.path.join(path, name)
+        blob_path = local_path.replace(temp_dir + '/', '')
 
-def upload_files(bucketName):
-    """Upload files to GCP bucket."""
-    files = [f for f in listdir(localFolder) if path.isfile(path.join(localFolder, f))]
-    for file in files:
-        localFile = localFolder + file
-        blob = bucket.blob(bucketFolder + file)
-        blob.upload_from_filename(localFile)
-    return f'Uploaded {files} to "{bucketName}" bucket.'
+        blob = bucket.blob(blob_path)
+        blob.upload_from_filename(local_path)
 
-
-upload_files(bucket)
+shutil.rmtree(temp_dir)
