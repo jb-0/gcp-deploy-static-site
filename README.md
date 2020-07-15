@@ -9,7 +9,6 @@ from google.oauth2 import service_account
 
 bucket_name = '__NAME OF STORAGE BUCKET__'
 project = '__FULL GCP PROJECT NAME__'
-local_folder = '__/Users/jamie/Documents/dev/site/css/__'
 
 credentials = service_account.Credentials.from_service_account_file(
     '__PATH TO SA KEY__',
