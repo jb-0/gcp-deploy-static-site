@@ -1,3 +1,5 @@
 .idea
 .DS_store
 *venv*
+config.py
+__pycache__/
