@@ -1,5 +1,12 @@
 # GCS Static site continuous deployment
+To achieve continuous deployment for static sites hosted in Google Cloud Storage Buckets, I developed this Cloud 
+Function in Python. The Google Cloud Function is triggered via a GitHub webhook and is authorised against a secret 
+stored in Google Secrets management.
+ 
+This script can also be easily adapted to be run locally, using a Service Account. Refer early commit history for detail
+on local configuration.
 
-This simple script clones a git repo into a local temp folder. The script walks through this temp folder and writes the files to a storage bucket.
 
-To use this script run the main.py file, you will need to include appropriate configuration for your enviornment, an example of how a config.py file could look can be seen below.
+## Getting Started
+The steps below outline how you can use this script in your GCP environment:
+1. 
