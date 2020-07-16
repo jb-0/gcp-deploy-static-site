@@ -25,7 +25,7 @@ steps are required to ensure this code operates as intended:
         ii. BUCKET_NAME: The name of your storage bucket
         ii. GIT_REPO: The clone path of the repo you want to copy to your storage bucket
         
-5. Deploy the cloud function and take note of the URL
+4. Deploy the cloud function and take note of the URL
 
 **GitHub GUI (https://github.com/)**
 1. While in the repo you assigned to GIT_REPO earlier click "Setting" > "Webhooks"
