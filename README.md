@@ -15,18 +15,12 @@ The steps below outline how you can use this script in your GCP environment, wit
 2. Create a new cloud function in the same project as your static site bucket
 3. There are a number of configuration settings that you will customise as necessary, however the following configuration
 steps are required to ensure this code operates as intended:
-
-    a. Select trigger as "HTTP"
-    
-    b. Tick "Allow unauthenticated invocations" 
-    
-    c. Select "Inline Editor" with runtime "Python 3.7+"
-    
-    d. Copy the code from "main.py" and "requirements.txt" into the corresponding textboxes
-    
-    e. Select a service account with permissions to write to storage and read the relevant secret
-    
-    f.Set the required Environment Variables -
+    * Select trigger as "HTTP"
+    * Tick "Allow unauthenticated invocations" 
+    * Select "Inline Editor" with runtime "Python 3.7+"
+    * Copy the code from "main.py" and "requirements.txt" into the corresponding textboxes
+    * Select a service account with permissions to write to storage and read the relevant secret
+    * Set the required Environment Variables -
         i. SECRET_PATH: The path noted in step 1
         ii. BUCKET_NAME: The name of your storage bucket
         ii. GIT_REPO: The clone path of the repo you want to copy to your storage bucket
