@@ -17,14 +17,20 @@ The steps below outline how you can use this script in your GCP environment, wit
 steps are required to ensure this code operates as intended:
 
     a. Select trigger as "HTTP"
+    
     b. Tick "Allow unauthenticated invocations" 
+    
     c. Select "Inline Editor" with runtime "Python 3.7+"
+    
     d. Copy the code from "main.py" and "requirements.txt" into the corresponding textboxes
+    
     e. Select a service account with permissions to write to storage and read the relevant secret
+    
     f.Set the required Environment Variables -
         i. SECRET_PATH: The path noted in step 1
         ii. BUCKET_NAME: The name of your storage bucket
         ii. GIT_REPO: The clone path of the repo you want to copy to your storage bucket
+        
 5. Deploy the cloud function and take note of the URL
 
 **GitHub GUI (https://github.com/)**
