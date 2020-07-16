@@ -1,17 +1,30 @@
-from google.cloud import storage
-from config import bucket_name, credentials, project
+from google.cloud import storage, secretmanager
 import os
 import git
 import shutil
 import tempfile
+import hashlib
+import hmac
+
+
+def authorisation(request):
+    secrets = secretmanager.SecretManagerServiceClient()
+    secret = secrets.access_secret_version(os.environ.get('SECRET_PATH')).payload.data
+
+    signature = hmac.new(secret, request.data, hashlib.sha1).hexdigest()
+    if hmac.compare_digest(signature, request.headers['X-Hub-Signature'].split('=')[1]):
+        main()
+    else:
+        raise RuntimeError('Terminated as HMAC compare is false')
 
 
 def main():
-    storage_client = storage.Client(credentials=credentials, project=project)
-    bucket = storage_client.bucket(bucket_name)
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(os.environ.get('BUCKET_NAME'))
 
     temp_dir = tempfile.mkdtemp()
-    git.Repo.clone_from('https://github.com/jb-0/site.git', temp_dir, branch='master', depth=1)
+
+    git.Repo.clone_from(os.environ.get('GIT_REPO'), temp_dir, branch='master', depth=1)
 
     upload_repo_to_bucket(temp_dir, bucket)
 
@@ -31,6 +44,3 @@ def upload_repo_to_bucket(dir, bucket):
 
             blob = bucket.blob(blob_path)
             blob.upload_from_filename(local_path)
-
-
-main()
