@@ -15,6 +15,7 @@ The steps below outline how you can use this script in your GCP environment, wit
 2. Create a new cloud function in the same project as your static site bucket
 3. There are a number of configuration settings that you will customise as necessary, however the following configuration
 steps are required to ensure this code operates as intended:
+
     a. Select trigger as "HTTP"
     b. Tick "Allow unauthenticated invocations" 
     c. Select "Inline Editor" with runtime "Python 3.7+"
