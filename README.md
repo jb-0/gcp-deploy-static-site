@@ -40,5 +40,6 @@ This concludes the setup, when you push to this repo your site will be automatic
   
 ## Improvements
 Potential improvements that could be made to this code can be seen below:
+- Any push event to the repository (regardless of whether it is the master branch) will trigger the cloud function, the function should check which branch triggered the webhook and only deploy if the branch is the master 
 - Currently all files (other than those explicitly excluded) are copied from GitHub, regardless of whether they are
 - The getting started section above should include a gcloud CLI deployment approach
