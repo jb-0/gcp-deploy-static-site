@@ -21,10 +21,10 @@ steps are required to ensure this code operates as intended:
     * Copy the code from "main.py" and "requirements.txt" into the corresponding textboxes
     * Select a service account with permissions to write to storage and read the relevant secret
     * Set the required Environment Variables -
-     * SECRET_PATH: The path noted in step 1
-     * BUCKET_NAME: The name of your storage bucket
-     * GIT_REPO: The clone path of the repo you want to copy to your storage bucket
-     * CACHE_CONTROL: https://cloud.google.com/storage/docs/metadata#caching_data
+      * SECRET_PATH: The path noted in step 1
+      * BUCKET_NAME: The name of your storage bucket
+      * GIT_REPO: The clone path of the repo you want to copy to your storage bucket
+      * CACHE_CONTROL: https://cloud.google.com/storage/docs/metadata#caching_data
         
 4. Deploy the cloud function and take note of the URL
 
