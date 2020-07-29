@@ -43,4 +43,5 @@ def upload_repo_to_bucket(dir, bucket):
             blob_path = local_path.replace(dir + '/', '')
 
             blob = bucket.blob(blob_path)
+            blob.cache_control = os.environ.get('CACHE_CONTROL')
             blob.upload_from_filename(local_path)
